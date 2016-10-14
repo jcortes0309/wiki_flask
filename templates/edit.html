@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+
+{% block body %}
+<form class="" action="/{{page_name}}/save" method="POST">
+
+<p>
+  <textarea name="page_content" rows="8" cols="120" value=""></textarea><br>
+  <button type="submit" name="submit_button">Make this page!</button>
+</p>
+
+</form>
+
+{% endblock %}

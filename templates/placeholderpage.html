@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+
+{% block body %}
+
+  {% if page_name == query.title %}
+    <p>{{query.page_content}}</p>
+    <p>{{query.last_mod_date}}</p>
+    <p>{{query.author_name}}</p>
+  {% else %}
+    <h1>This page hasn't been created yet</h1>
+    <p>
+      <a href="/{{ page_name }}/edit">Edit this page</a>
+      {{query.title}}
+    </p>
+  {% endif %}
+
+
+{% endblock %}
