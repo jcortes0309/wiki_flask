@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect
+from wiki_linkify import wiki_linkify
 import pg, datetime
 app = Flask("wiki")
 
