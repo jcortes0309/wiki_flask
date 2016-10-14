@@ -3,21 +3,39 @@
 
 {% block body %}
 <form class="" action="/{{page_name}}/save" method="POST">
+{% if page_name == query.title %}
+  <input type="hidden" name="id" value="{{query.id}}">
+  <p>
+    <textarea name="page_content" rows="8" cols="120" value="">{{query.page_content}}</textarea><br>
+  </p>
+  <p>
+    <label for="" name="author_name" value="">Author Name:</label><br>
+    <input type="text" name="author_name" value="{{query.author_name}}">
+  </p>
+  <p>
+    <label for="" name="update_time">Last Updated:</label><br>
+    <input type="text" name="last_mod_date" value="{{query.last_mod_date}}">
+  </p>
+  <p>
+    <button type="submit" name="submit_button" value="update">Update this page!</button>
+  </p>
+{% else %}
+  <p>
+    <textarea name="page_content" rows="8" cols="120" value=""></textarea><br>
+  </p>
+  <p>
+    <label for="" name="author_name" value="">Author Name:</label><br>
+    <input type="text" name="author_name" value="">
+  </p>
+  <p>
+    <label for="" name="update_time">Last Updated:</label><br>
+    <input type="text" name="last_mod_date" value="{{query.last_mod_date}}">
+  </p>
+  <p>
+    <button type="submit" name="submit_button" value="create">Make this page!</button>
+  </p>
 
-<p>
-  <textarea name="page_content" rows="8" cols="120" value=""></textarea><br>
-</p>
-<p>
-  <label for="" name="author_name" value="">Author Name:</label><br>
-  <input type="text" name="author_name" value="">
-</p>
-<p>
-  <label for="" name="update_time">Last Updated:</label><br>
-  print {{now}}
-</p>
-<p>
-  <button type="submit" name="submit_button">Make this page!</button>
-</p>
+{% endif %}
 
 </form>
 

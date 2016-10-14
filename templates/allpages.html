@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+{% extends "layout.html" %}
+
+{% block body %}
+<ul>
+{% for item in query %}
+
+    <li><a href="/{{item.title}}">{{item.title}}</a></li>
+
+{% endfor %}
+</ul>
+{% endblock %}
