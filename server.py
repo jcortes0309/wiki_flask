@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, Markup
 from wiki_linkify import wiki_linkify
-import pg, datetime, markdown
+import pg, markdown
+from datetime import datetime
 app = Flask("wiki")
 
 db = pg.DB(dbname="wiki")
@@ -48,6 +49,9 @@ def edit_page(page_name):
 
 @app.route("/<page_name>/save", methods=["POST"])
 def save_content(page_name):
+    current_time = datetime.now()
+    last_mod_time = current_time.strftime('%Y/%m/%d %H:%M:%S')
+    print "Last mod time: '%s'" % last_mod_time
     id = request.form.get("id")
     page_content = request.form.get("page_content")
     author_name = request.form.get("author_name")
@@ -59,7 +63,7 @@ def save_content(page_name):
                 "id": id,
                 "page_content": page_content,
                 "author_name": author_name,
-                "last_mod_date": last_mod_date,
+                "last_mod_date": last_mod_time
             }
         )
     elif action == "create":

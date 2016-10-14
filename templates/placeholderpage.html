@@ -10,14 +10,18 @@
     <p><b>Authored by:</b> {{query.author_name}}</p>
     <p><b>Last modified at:</b> {{query.last_mod_date}}</p>
     <p>
-      <a href="/{{ page_name }}/edit">Edit this page</a><br>
-      List of <a href="/AllPages">All Pages</a>
+      <a href="/{{ page_name }}/edit">Edit this page</a>
+      <br>
+      <br>
+      <a href="/AllPages">View All Pages</a>
     </p>
   {% else %}
     <h1>This page hasn't been created yet</h1>
     <p>
-      <a href="/{{ page_name }}/edit">Edit this page</a><br>
-      List of <a href="/AllPages">All Pages</a>
+      <a href="/{{ page_name }}/edit">Edit this page</a>
+      <br>
+      <br>
+      <a href="/AllPages">View All Pages</a>
     </p>
   {% endif %}
 
