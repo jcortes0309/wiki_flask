@@ -4,9 +4,11 @@
 {% block body %}
 
   {% if page_name == query.title %}
+    <br>
     <p>{{query.page_content}}</p>
-    <p>{{query.last_mod_date}}</p>
-    <p>{{query.author_name}}</p>
+    <br>
+    <p><b>Authored by:</b> {{query.author_name}}</p>
+    <p><b>Last modified at:</b> {{query.last_mod_date}}</p>
   {% else %}
     <h1>This page hasn't been created yet</h1>
     <p>

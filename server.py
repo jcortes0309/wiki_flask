@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-import pg
+import pg, datetime
 app = Flask("wiki")
 
 db = pg.DB(dbname="wiki")
@@ -27,6 +27,8 @@ def place_holder(page_name):
 
 @app.route("/<page_name>/edit")
 def edit_page(page_name):
+    query = db.query("select * from page where title = '%s'" % page_name).namedresult()
+    print query
     return render_template(
         "edit.html",
         page_name=page_name
@@ -36,10 +38,12 @@ def edit_page(page_name):
 def save_content(page_name):
     print page_name
     page_content = request.form.get("page_content")
+    author_name = request.form.get("author_name")
     db.insert (
         "page",
+        title=page_name,
         page_content=page_content,
-        title=page_name
+        author_name=author_name
     )
     return redirect("/%s" % page_name)
 
