@@ -13,12 +13,17 @@
     <input type="text" name="author_name" value="{{query.author_name}}">
   </p>
   <p>
-    <label for="" name="update_time">Last Updated:</label><br>
+    <label for="" name="update_time">Last Modified:</label><br>
     <input type="text" name="last_mod_date" value="{{query.last_mod_date}}">
+  </p>
+  <p>
+    <label for="">Current Version Number:</label><br>
+    <input type="text" name="version_number" value="{{ query.version_number }}" readonly>
   </p>
   <p>
     <button type="submit" name="submit_button" value="update">Update this page!</button>
   </p>
+
 {% else %}
   <p>
     <textarea name="page_content" rows="8" cols="120" value=""></textarea><br>
@@ -26,10 +31,6 @@
   <p>
     <label for="" name="author_name" value="">Author Name:</label><br>
     <input type="text" name="author_name" value="">
-  </p>
-  <p>
-    <label for="" name="update_time">Last Updated:</label><br>
-    <input type="text" name="last_mod_date" value="{{query.last_mod_date}}">
   </p>
   <p>
     <button type="submit" name="submit_button" value="create">Make this page!</button>

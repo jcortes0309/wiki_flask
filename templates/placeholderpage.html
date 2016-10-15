@@ -7,14 +7,65 @@
     <br>
     <p>{{page_content | safe}}</p>
     <br>
-    <p><b>Authored by:</b> {{query.author_name}}</p>
-    <p><b>Last modified at:</b> {{query.last_mod_date}}</p>
+    <p>
+      <b>Authored by:</b> {{query.author_name}}
+    </p>
+    <p>
+      <b>Last modified at:</b> {{query.last_mod_date}}
+    </p>
+    <p>
+      <b>Current version number:</b> {{ query.version_number }}
+    </p>
     <p>
       <a href="/{{ page_name }}/edit">Edit this page</a>
       <br>
       <br>
       <a href="/AllPages">View All Pages</a>
     </p>
+    {% if query.version_number != 1 %}
+      <br>
+      <hr>
+      <h2>Version History</h2>
+      <table>
+        <tr>
+          <th>
+            Page Title
+          </th>
+          <th>
+            Author Name
+          </th>
+          <th>
+            Modified At:
+          </th>
+          <th>
+            Page Content
+          </th>
+          <th>
+            Version Number
+          </th>
+        </tr>
+        {% for item in query_history %}
+          <tr>
+            <td>
+              {{ item.title }}
+            </td>
+            <td>
+              {{ item.author_name }}
+            </td>
+            <td>
+              {{ item.last_mod_date }}
+            </td>
+            <td>
+              {{ item.page_content }}
+            </td>
+            <td>
+              {{ item.version_number }}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+
   {% else %}
     <h1>This page hasn't been created yet</h1>
     <p>
@@ -25,5 +76,5 @@
     </p>
   {% endif %}
 
-
+<br><br>
 {% endblock %}
