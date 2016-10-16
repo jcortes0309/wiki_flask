@@ -40,7 +40,7 @@ tr:nth-child(odd) {
     background-color: #fff;
 }
 
-/* Toggle Styles */
+/* Sidebar and Page Content Styles */
 
 #wrapper {
     padding-left: 0;
@@ -48,10 +48,6 @@ tr:nth-child(odd) {
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-}
-
-#wrapper.toggled {
-    padding-left: 250px;
 }
 
 #sidebar-wrapper {
@@ -69,7 +65,7 @@ tr:nth-child(odd) {
     transition: all 0.5s ease;
 }
 
-#wrapper.toggled #sidebar-wrapper {
+#sidebar-wrapper {
     width: 250px;
 }
 
@@ -79,7 +75,7 @@ tr:nth-child(odd) {
     padding: 15px;
 }
 
-#wrapper.toggled #page-content-wrapper {
+#page-content-wrapper {
     position: absolute;
     margin-right: -250px;
 }
@@ -89,15 +85,11 @@ tr:nth-child(odd) {
         padding-left: 250px;
     }
 
-    #wrapper.toggled {
-        padding-left: 0;
-    }
-
     #sidebar-wrapper {
         width: 250px;
     }
 
-    #wrapper.toggled #sidebar-wrapper {
+    #sidebar-wrapper {
         width: 0;
     }
 
@@ -106,7 +98,7 @@ tr:nth-child(odd) {
         position: relative;
     }
 
-    #wrapper.toggled #page-content-wrapper {
+    #page-content-wrapper {
         position: relative;
         margin-right: 0;
     }
