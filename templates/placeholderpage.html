@@ -3,8 +3,14 @@
 
 {% block body %}
 
+{% if page_name == "homepage" %}
+  <h2>{{ page_name }}</h2>
+{% else %}
+  <h2>Page: {{ page_name }}</h2>
+{% endif %}
+<br>
+
   {% if page_name == query.title %}
-    <br>
     <p>{{page_content | safe}}</p>
     <br>
     <p>
@@ -19,9 +25,9 @@
     <p>
       <a href="/{{ page_name }}/edit">Edit this page</a>
       <br>
-      <br>
-      <a href="/AllPages">View All Pages</a>
+      <a href="/AllPages">View all pages</a>
     </p>
+
     {% if query.version_number != 1 %}
       <br>
       <hr>
@@ -44,6 +50,7 @@
             Version Number
           </th>
         </tr>
+
         {% for item in query_history %}
           <tr>
             <td>

@@ -2,6 +2,10 @@
 {% extends "layout.html" %}
 
 {% block body %}
+
+<h2>Edit: {{ page_name }}</h2>
+<br>
+
 <form class="" action="/{{page_name}}/save" method="POST">
 {% if page_name == query.title %}
   <input type="hidden" name="id" value="{{query.id}}">
