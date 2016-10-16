@@ -15,12 +15,15 @@ def home_page():
 def place_holder(page_name):
     # Query database looking for existing information for the page called by the user
     query = db.query("select * from page where title = '%s'" % page_name).namedresult()
+    all_pages_query = db.query("select title from page order by title;").namedresult()
+    print "\n\nAll pages query: %r\n\n" % all_pages_query
     # No information was found in the database for the page
     if len(query) == 0:
         return render_template(
             "placeholderpage.html",
             page_name = page_name,
-            query=query
+            query = query,
+            all_pages_query = all_pages_query
         )
     # Information was found in the database for the page
     else:
@@ -38,7 +41,8 @@ def place_holder(page_name):
                 page_name = page_name,
                 query = query,
                 page_content = Markup(markdown.markdown(wiki_linkified_content)),
-                query_history = query_history
+                query_history = query_history,
+                all_pages_query = all_pages_query
             )
         else:
             return render_template(
@@ -46,6 +50,7 @@ def place_holder(page_name):
                 page_name = page_name,
                 query = query,
                 page_content = Markup(markdown.markdown(wiki_linkified_content)),
+                all_pages_query = all_pages_query
             )
 
 @app.route("/<page_name>/edit")
@@ -116,10 +121,11 @@ def save_content(page_name):
 
 @app.route("/AllPages")
 def all_pages():
-    query = db.query("select title from page order by title;").namedresult()
+    all_pages_query = db.query("select title from page order by title;").namedresult()
+    print "\n\nAll pages query: %r\n\n" % all_pages_query
     return render_template(
         "allpages.html",
-        query=query
+        all_pages_query = all_pages_query
     )
 
 @app.route("/search")

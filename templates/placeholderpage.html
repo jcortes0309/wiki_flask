@@ -25,7 +25,10 @@
     <p>
       <a href="/{{ page_name }}/edit">Edit this page</a>
       <br>
-      <a href="/AllPages">View all pages</a>
+      <br>
+      {% if page_name != "homepage" %}
+        <a href="/">Home Page</a>
+      {% endif %}
     </p>
 
     {% if query.version_number != 1 %}
@@ -79,7 +82,9 @@
       <a href="/{{ page_name }}/edit">Edit this page</a>
       <br>
       <br>
-      <a href="/AllPages">View All Pages</a>
+      {% if page_name != "homepage" %}
+        <a href="/">Home Page</a>
+      {% endif %}
     </p>
   {% endif %}
 

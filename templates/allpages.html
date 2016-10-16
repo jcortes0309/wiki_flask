@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-{% extends "layout.html" %}
 
-{% block body %}
+<br>
 <br>
 <ul>
-{% for item in query %}
-
+  {% for item in all_pages_query %}
     <li><a href="/{{item.title}}">{{item.title}}</a></li>
-
-{% endfor %}
+  {% endfor %}
 </ul>
-{% endblock %}
