@@ -152,6 +152,7 @@ def submit_login():
             # successfully logged in
             session["username"] = user.username
             # We can use this to redirect the user to see their page after he logs in
+            flash("%s, you have successfully logged into the application" % username)
             return redirect("/shoes")
         else:
             # We can have a separate page to login and redirect users to this page if they have problems login in

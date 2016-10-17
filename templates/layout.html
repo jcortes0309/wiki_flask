@@ -63,6 +63,18 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
+                <!-- Flash messages -->
+                {% with messages = get_flashed_messages() %}
+                  {% if messages %}
+                    <ul class="flashes alert alert-success alert-dismissible text-center" role="alert">
+                      {% for message in messages %}
+                        <li>{{ message }}</li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                {% endwith %}
+                <!-- End Flash Messages -->
+
                 {% block body %}
                 <h1>Place holder Page</h1>
                 {% endblock %}
