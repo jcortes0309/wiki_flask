@@ -128,20 +128,14 @@ def all_pages():
         all_pages_query = all_pages_query
     )
 
-@app.route("/search")
+@app.route("/search", methods = ["POST"])
 def search_pages():
-    search = request.args.get("search")
+    search = request.form.get("search")
     page = db.query("select title from page where title = '%s'" % search).namedresult()
-    print search
-    print page
     if len(page) == 0:
         return redirect("/%s" % search)
     else:
-        return render_template(
-            "search.html",
-            search=search,
-            page=page
-        )
+        return place_holder(search)
 
 if __name__ == "__main__":
     app.run(debug=True)
