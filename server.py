@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, Markup
+from flask import Flask, render_template, request, redirect, Markup, flash, session
 from wiki_linkify import wiki_linkify
 import pg, markdown
 from datetime import datetime
@@ -136,6 +136,33 @@ def search_pages():
         return redirect("/%s" % search)
     else:
         return place_holder(search)
+
+@app.route("/submit_login", methods = ["POST"])
+def submit_login():
+    username = request.form.get("username")
+    print "\n\nusername: %s" % username
+    password = request.form.get("password")
+    print "\npassword: %s" % password
+    print "\n\n"
+    query = db.query("select * from users where username = $1", username)
+    result_list = query.namedresult()
+    if len(result_list) > 0:
+        user = result_list[0]
+        if user.password == password:
+            # successfully logged in
+            session["username"] = user.username
+            # We can use this to redirect the user to see their page after he logs in
+            return redirect("/shoes")
+        else:
+            # We can have a separate page to login and redirect users to this page if they have problems login in
+            return redirect("/lipsum")
+    else:
+        return redirect("/")
+
+
+
+
+app.secret_key = "hello happy kitty kat"
 
 if __name__ == "__main__":
     app.run(debug=True)
