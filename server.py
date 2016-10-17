@@ -14,7 +14,7 @@ def home_page():
 @app.route("/<page_name>")
 def place_holder(page_name):
     # Query database looking for existing information for the page called by the user
-    query = db.query("select * from page where title = '%s'" % page_name).namedresult()
+    query = db.query("select * from page where title = $1", page_name).namedresult()
     all_pages_query = db.query("select title from page order by title;").namedresult()
     print "\n\nAll pages query: %r\n\n" % all_pages_query
     # No information was found in the database for the page
@@ -30,7 +30,7 @@ def place_holder(page_name):
         query = query[0]
         print query
         # Query database looking for historical information for the page called by the user
-        query_history = db.query("select * from page_history where page_id = '%s' order by version_number DESC;" % query.id).namedresult()
+        query_history = db.query("select * from page_history where page_id = $1 order by version_number DESC;", query.id).namedresult()
         print query_history
         page_content = query.page_content
         wiki_linkified_content = wiki_linkify(page_content)
@@ -55,7 +55,7 @@ def place_holder(page_name):
 
 @app.route("/<page_name>/edit")
 def edit_page(page_name):
-    query = db.query("select * from page where title = '%s'" % page_name).namedresult()
+    query = db.query("select * from page where title = $1", page_name).namedresult()
     if len(query) == 0:
         return render_template(
             "edit.html",
@@ -74,7 +74,7 @@ def save_content(page_name):
     action = request.form.get("submit_button")
 
     if action == "update":
-        query = db.query("select * from page where title = '%s'" % page_name)
+        query = db.query("select * from page where title = $1", page_name)
         result_list = query.namedresult()
         print result_list
         result_list = result_list[0]
@@ -131,7 +131,7 @@ def all_pages():
 @app.route("/search", methods = ["POST"])
 def search_pages():
     search = request.form.get("search")
-    page = db.query("select title from page where title = '%s'" % search).namedresult()
+    page = db.query("select title from page where title = $1", search).namedresult()
     if len(page) == 0:
         return redirect("/%s" % search)
     else:
