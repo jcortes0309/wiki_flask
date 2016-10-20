@@ -150,10 +150,7 @@ def search_pages():
 @app.route("/submit_login", methods = ["POST"])
 def submit_login():
     username = request.form.get("username")
-    print "\n\nusername: %s" % username
     password = request.form.get("password")
-    print "\npassword: %s" % password
-    print "\n\n"
     query = db.query("select * from users where username = $1", username)
     result_list = query.namedresult()
     if len(result_list) > 0:
@@ -163,13 +160,17 @@ def submit_login():
             session["username"] = user.username
             # We can use this to redirect the user to see their page after he logs in
             flash("%s, you have successfully logged into the application" % username)
-            return redirect("/shoes")
+            return redirect("/")
         else:
             # We can have a separate page to login and redirect users to this page if they have problems login in
             return redirect("/lipsum")
     else:
         return redirect("/")
 
+@app.route("/submit_logout", methods = ["POST"])
+def submit_logout():
+    del session["username"]
+    return redirect("/")
 
 
 

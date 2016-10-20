@@ -24,14 +24,23 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <form class="navbar-form navbar-right" action="/submit_login" method = "POST">
+          {% if session["username"] %}
+            <form class="navbar-form navbar-right" action="/submit_logout" method = "POST">
+              <span>
+                Hello {{ session["username"].capitalize() }}
+              </span>
+              <button type="submit" class="btn btn-default">Logout</button>
+            </form>
+          {% else %}
+            <form class="navbar-form navbar-right" action="/submit_login" method = "POST">
+              <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="username">
+                <input type="password" class="form-control" name="password" placeholder="password">
 
-            <div class="form-group">
-              <input type="text" class="form-control" name="username" placeholder="username">
-              <input type="password" class="form-control" name="password" placeholder="password">
-            </div>
-            <button type="submit" class="btn btn-default">Login</button>
-          </form>
+              </div>
+              <button type="submit" class="btn btn-default">Login</button>
+            </form>
+          {% endif %}
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
@@ -45,10 +54,10 @@
           <div class="col-md-10">
             <br>
             <form class="" action="/search" method="POST">
-              <input type="search" name="search" value="" size="30" placeholder="Search for a specific page">
+              <input type="search" name="search" value="" size="30" placeholder="Search for a page">
               <br>
               <br>
-              <button type="submit" name="button_search" value="">Search</button>
+              <button class="btn btn-success" type="submit" name="button_search" value="">Search</button>
             </form>
           </div>
         </div>
@@ -92,7 +101,7 @@
 
 
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </body>
